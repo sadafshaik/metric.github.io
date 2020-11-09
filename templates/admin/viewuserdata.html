@@ -1,0 +1,96 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+
+{% block contents %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  width:100%;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+#t01 tr:nth-child(even) {
+  background-color: black;
+}
+#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+#t01 th {
+  background-color: black;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<section id="intro" class="clearfix">
+    <div class="container d-flex h-100">
+      <div class="row justify-content-center align-self-center">
+        <div class="col-md-6 intro-info order-md-first order-last">
+            <h2 style="color:#A6E7FX">View users details </h2>
+                            <table class="table table-striped">
+							<thead class="thead-dark">
+							<table border="white" align="letter-spacing">
+                                  <tr>
+								  <th scope="col">sno</th>
+							  <th scope="col">Name</th>
+							  <th scope="col">Mail</th>
+							  <th scope="col">Password</th>
+							  
+							  <th scope="col">status</th>
+							  <th scope="col">activate</th>
+								  <!--<th style="color:brown">sno</th>
+                                  <th style="color:brown">name</th>
+                                    <th style="color:brown">mail</th>
+                                    <th style="color:brown">password</th>
+<!--                                    <th style="color:red">cwpasswd</th>-->
+<!--                                    <th style="color:red">qualification</th>-->
+<!--                                    <th style="color:red">mobileno</th>-->
+                                    <!--<th style="color:brown">status</th>
+                                    <th style="color:brown">activate</th> -->
+                                  </tr>
+							  </thead>
+							<tbody>
+                              {% for x in qs %}
+                                  <tr>
+                                    <td style="color:black">{{x.id}}</td>
+                                    <td style="color:black">{{x.name}}</td>
+                                    <td style="color:black">{{x.mail}}</td>
+                                    <td style="color:black">{{x.passwd}}</td>
+<!--                                    <td style="color:black">{{x.cwpasswd}}</td>-->
+<!--                                    <td style="color:black">{{x.qualification}}</td>-->
+<!--                                    <td style="color:black">{{x.mobileno}}</td>-->
+                                    <td style="color:black">{{x.status}}</td>
+                                       {% if x.status == 'waiting' %}
+                                    <td style="color:black"> <a href="/activateuser/?pid={{ x.id }}" >Activate</a></td>
+                                    {% else %}
+                                            <td style="color:green"> Activated</td>
+                                            {% endif %}
+
+                                     </tr>
+                                    {% endfor %}
+									</tbody>
+
+                            </table>
+
+
+
+        </div>
+
+        <div class="col-md-6 userdata.v4 order-md-center order-last">
+          <br><br><br><img src="{% static 'img/userdata.v4.png' %}" alt="" class="img-fluid">
+        </div>
+      </div>
+
+    </div>
+  </section><!-- #intro -->
+
+{% endblock %}
